@@ -10,7 +10,7 @@ const SITE = 'https://apex-node.net';
 const TG_BOT = 'https://t.me/ApexNoderobot';
 const DISCORD_BOT = 'https://discord.com/users/1513274011709083668';
 
-type Info = { ok: boolean; active: boolean; days_left: number; token: string };
+type Info = { ok: boolean; active: boolean; days_left: number; token: string; sub_token?: string };
 
 export default function CabPage() {
   const [state, setState] = useState<'loading' | 'ok' | 'bad'>('loading');
@@ -63,7 +63,7 @@ export default function CabPage() {
             <p style={styles.muted}>Выбери, где продолжить — ты уже авторизован:</p>
 
             <div style={styles.buttons}>
-              <a style={{ ...styles.btn, ...styles.btnPrimary }} href={`${SITE}/?t=${encodeURIComponent(token)}`}>
+              <a style={{ ...styles.btn, ...styles.btnPrimary }} href={info.sub_token ? `${SITE}/?token=${encodeURIComponent(info.sub_token)}` : SITE}>
                 🌐 Открыть сайт
               </a>
               <a style={{ ...styles.btn, ...styles.btnTg }} href={`${TG_BOT}?start=${encodeURIComponent(token)}`}>
